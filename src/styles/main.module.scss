@@ -1,14 +1,15 @@
 .main {
   background-color: azure;
   width: 900px;
-  height: 579px;
   padding: 20px;
+  margin-top: 100px;
+  margin-bottom: 70px;
 }
 
 .itemCard {
   display: flex;
   justify-content: space-around;
-  background-color: cadetblue;
+  background-color: PaleTurquoise;
   margin: 30px;
-  padding: 10px;
+  padding: 30px;
 }

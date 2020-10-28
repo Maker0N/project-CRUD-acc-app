@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { deleteItem } from "./redux/state";
 import mainStyle from "./styles/main.module.scss";
+// import MainEdit from "./mainEdit";
 // import state from './redux/state'
 
 const { main, itemCard } = mainStyle;
@@ -11,11 +13,12 @@ const Main = (props) => {
       Main Aplication
       {props.state.list.map((it) => {
         const url = `https://ati.su/firms/${it.ati}/info`;
+        const number = it.id;
+        const editLink = `/edit/${number}`;
 
         function deleteButton(e) {
           e.preventDefault();
-          const id = it.id
-          props.deleteItem(id)
+          props.deleteItem(number);
         }
 
         return (
@@ -32,8 +35,10 @@ const Main = (props) => {
               </div>
             </div>
             <div>
-              <div onClick={deleteButton}>Удалить</div>
-              <div>Редактировать</div>
+              <button type="button" onClick={deleteButton}>
+                Удалить
+              </button>
+              <Link to={editLink}>Редактировать</Link>
             </div>
           </div>
         );

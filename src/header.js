@@ -7,7 +7,7 @@ const { header, links, buttonDiv } = headerStyle
 const Header = () => {
   return (
     <div className={header}>
-      Hader
+      Система приема и ведения заявок
       <div className={buttonDiv}>
         <Link to="/" className={links}>
           Список заявок
