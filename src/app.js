@@ -3,13 +3,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./header";
 import Main from "./main";
 import MainForm from "./mainForm";
-import MainEdit from './mainEdit'
+import MainEdit from "./mainEdit";
+import SearchResult from "./searchResult";
 import Footer from "./footer";
 
 const App = (props) => {
   return (
     <BrowserRouter>
-      <Header />
+      <Header state={props.state} createSearchList={props.createSearchList} />
       <Switch>
         <Route
           exact
@@ -32,8 +33,13 @@ const App = (props) => {
             <MainEdit state={props.state} editItem={props.editItem} />
           )}
         />
+        <Route
+          exact
+          path="/search"
+          render={() => <SearchResult state={props.state} deleteItem={props.deleteItem}/>}
+        />
       </Switch>
-      <Footer />
+      <Footer state={props.state} />
     </BrowserRouter>
   );
 };

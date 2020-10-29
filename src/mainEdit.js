@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import mainStyle from "./styles/main.module.scss";
 
-const { main } = mainStyle;
+const { main, normLink } = mainStyle;
 
 const MainEdit = (props) => {
   const { number } = useParams();
-
-  const [item] = props.state.list.filter(it => it.id === +number)
-  const [editState, setEditState] = useState(item)
-
-  console.log(editState)
+  const [item] = props.state.list.filter((it) => it.id === +number);
+  const [editState, setEditState] = useState(item);
 
   function changeInput(e) {
     const { name, value } = e.target;
@@ -22,7 +19,15 @@ const MainEdit = (props) => {
 
   function submitForm(e) {
     e.preventDefault();
-    const { id, date, clientName, carrierName, phone, comment, ati } = editState;
+    const {
+      id,
+      date,
+      clientName,
+      carrierName,
+      phone,
+      comment,
+      ati,
+    } = editState;
     const item = {
       id,
       date,
@@ -33,14 +38,12 @@ const MainEdit = (props) => {
       ati,
     };
     props.editItem(item);
-    e.target.reset();
   }
-
 
   return (
     <div className={main}>
-      MainEdit
-      <form type="submit" onSubmit={submitForm}>
+      <div style={{ "margin-bottom": "30px" }}>Отредактируйте данные</div>
+      <div>
         <div>
           Номер заявки:
           {editState.id}
@@ -87,12 +90,21 @@ const MainEdit = (props) => {
         </div>
         <div>
           ATI код сети перевозчика
-          <input type="text" name="ati" value={editState.ati} onChange={changeInput} />
+          <input
+            type="text"
+            name="ati"
+            value={editState.ati}
+            onChange={changeInput}
+          />
         </div>
-        <button type="submit">Сохранить</button>
-      </form>
+        <button onClick={submitForm}>
+          <Link to="/" className={normLink}>
+            Сохранить
+          </Link>
+        </button>
+      </div>
     </div>
   );
-}
+};
 
-export default MainEdit
+export default MainEdit;

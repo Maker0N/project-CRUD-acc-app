@@ -13,13 +13,23 @@
   color: beige;
   text-decoration: none;
   margin-right: 10px;
-  padding: 2px;
+  padding: 3px 10px 3px 10px;
   border: solid;
   border-width: 1px;
   border-radius: 8px;
   font-family: 'Montserrat';
 }
 
-.buttonDiv {
+.menu {
   margin-top: 10px;
+}
+
+.menuSearch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.normLink {
+  text-decoration: none;
+  color: black;
 }

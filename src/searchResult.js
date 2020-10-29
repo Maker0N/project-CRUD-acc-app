@@ -1,16 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 import mainStyle from "./styles/main.module.scss";
 
-const { main, itemCard, normButton, normLink, redButton } = mainStyle;
+const { main, itemCard, normButton, redButton, normLink } = mainStyle;
 
-const Main = (props) => {
+const SearchResult = (props) => {
+  let result = 'результатов'
+  switch (props.state.searchList.length) {
+    case 1:
+      result = 'результат'
+      break
+    case 2 || 3 || 4:
+      result = 'результата'
+      break
+    default:
+      result = "результатов";
+  }
   return (
     <div className={main}>
-      Список заявок
+      Нашлось {props.state.searchList.length} {result} поиска по "{props.state.keyWord}"
 
-      {props.state.list.map((it) => {
-        
+      {props.state.searchList.map((it) => {
+
         const url = `https://ati.su/firms/${it.ati}/info`;
         const number = it.id;
         const editLink = `/edit/${number}`;
@@ -34,24 +45,18 @@ const Main = (props) => {
               </div>
             </div>
             <div>
-              <button
-                className={redButton}
-                type="button"
-                onClick={deleteButton}
-              >
+              <button className={redButton} type="button" onClick={deleteButton}>
                 Удалить
               </button>
               <button className={normButton} type="button">
-                <Link to={editLink} className={normLink}>
-                  Редактировать
-                </Link>
+                <Link to={editLink} className={normLink}>Редактировать</Link>
               </button>
             </div>
           </div>
         );
       })}
     </div>
-  );
-};
+  )
+}
 
-export default Main;
+export default SearchResult

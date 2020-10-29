@@ -3,8 +3,9 @@ import footerStyle from './styles/footer.module.scss'
 
 const { footer } = footerStyle
 
-const Footer = () => {
-  return <div className={footer}>Footer</div>;
+const Footer = (props) => {
+  const sumOfTasks = `Заявок на данный момент: ${props.state.list.length} шт.`;
+  return <div className={footer}>{sumOfTasks}</div>;
 };
 
 export default Footer;

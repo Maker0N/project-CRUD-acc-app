@@ -1,17 +1,16 @@
 import React from "react";
 import { useState } from "react";
-// import state from "./redux/state";
+import { Link } from 'react-router-dom'
 import mainStyle from "./styles/main.module.scss";
 
-const { main } = mainStyle;
-
-// const date = Date();
+const { main, normLink } = mainStyle;
 
 const MainForm = (props) => {
   let numberItem
     props.state.list.length === 0
       ? (numberItem = 1)
       : (numberItem = props.state.list[props.state.list.length - 1].id + 1);
+
   const [formState, setFormState] = useState({
     id: numberItem,
     date: Date(),
@@ -22,7 +21,7 @@ const MainForm = (props) => {
     ati: undefined,
   });
 
-  const { clientName, carrierName, phone, comment, ati } = formState;
+  const { date, clientName, carrierName, phone, comment, ati } = formState;
 
   function changeInput(e) {
     const { name, value } = e.target;
@@ -34,7 +33,7 @@ const MainForm = (props) => {
 
   function submitForm(e) {
     e.preventDefault();
-    const { date, clientName, carrierName, phone, comment, ati } = formState;
+    // const { date, clientName, carrierName, phone, comment, ati } = formState;
     const item = {
       id: numberItem,
       date,
@@ -45,13 +44,12 @@ const MainForm = (props) => {
       ati,
     };
     props.addNewItem(item);
-    e.target.reset();
   }
 
   return (
     <div className={main}>
-      Main Form
-      <form type="submit" onSubmit={submitForm}>
+      <div style={{"margin-bottom": "30px"}}>Внесите данные</div>
+      <div>
         <div>
           Номер заявки:
           {props.state.list.length + 1}
@@ -100,8 +98,12 @@ const MainForm = (props) => {
           ATI код сети перевозчика
           <input type="text" name="ati" value={ati} onChange={changeInput} />
         </div>
-        <button type="submit">Добавить</button>
-      </form>
+        <button onClick={submitForm}>
+          <Link to="/" className={normLink}>
+            Добавить
+          </Link>
+        </button>
+      </div>
     </div>
   );
 };
