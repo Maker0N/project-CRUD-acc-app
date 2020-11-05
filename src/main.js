@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { deleteItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, itemCard, normButton, normLink, redButton } = mainStyle;
@@ -10,14 +11,14 @@ const Main = (props) => {
       Список заявок
 
       {props.state.list.map((it) => {
-        
+
         const url = `https://ati.su/firms/${it.ati}/info`;
         const number = it.id;
         const editLink = `/edit/${number}`;
 
         function deleteButton(e) {
           e.preventDefault();
-          props.deleteItem(number);
+          props.dispatch(deleteItemAC(number));
         }
 
         return (

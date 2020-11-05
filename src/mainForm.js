@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
+import { addNewItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, normLink } = mainStyle;
@@ -43,7 +44,7 @@ const MainForm = (props) => {
       comment,
       ati,
     };
-    props.addNewItem(item);
+    props.dispatch(addNewItemAC(item));
   }
 
   return (
@@ -52,7 +53,7 @@ const MainForm = (props) => {
       <div>
         <div>
           Номер заявки:
-          {props.state.list.length + 1}
+          {numberItem}
         </div>
         <div>
           Дата и время получения заявки:

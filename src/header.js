@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { createSearchListAC } from './redux/taskReducer'
 import headerStyle from "./styles/header.module.scss";
 
 const { header, links, menu, menuSearch, normLink } = headerStyle;
@@ -14,7 +15,7 @@ const Header = (props) => {
   const submitSearch = (e) => {
     e.preventDefault();
     const searchString = searchState;
-    props.createSearchList(searchString);
+    props.dispatch(createSearchListAC(searchString));
   };
 
   return (

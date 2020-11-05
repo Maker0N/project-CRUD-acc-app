@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { deleteItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, itemCard, normButton, redButton, normLink } = mainStyle;
 
 const SearchResult = (props) => {
+  console.log(props)
   let result = 'результатов'
   switch (props.state.searchList.length) {
     case 1:
@@ -28,7 +30,7 @@ const SearchResult = (props) => {
 
         function deleteButton(e) {
           e.preventDefault();
-          props.deleteItem(number);
+          props.dispatch(deleteItemAC(number));
         }
 
         return (
@@ -45,11 +47,19 @@ const SearchResult = (props) => {
               </div>
             </div>
             <div>
-              <button className={redButton} type="button" onClick={deleteButton}>
-                Удалить
+              <button
+                className={redButton}
+                type="button"
+                onClick={deleteButton}
+              >
+                <Link to="/" className={normLink}>
+                  Удалить
+                </Link>
               </button>
               <button className={normButton} type="button">
-                <Link to={editLink} className={normLink}>Редактировать</Link>
+                <Link to={editLink} className={normLink}>
+                  Редактировать
+                </Link>
               </button>
             </div>
           </div>

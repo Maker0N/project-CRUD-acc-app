@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { editItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, normLink } = mainStyle;
@@ -37,7 +38,7 @@ const MainEdit = (props) => {
       comment,
       ati,
     };
-    props.editItem(item);
+    props.dispatch(editItemAC(item));
   }
 
   return (
