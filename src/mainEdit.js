@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 import { editItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, normLink } = mainStyle;
 
-const MainEdit = (props) => {
+const MainEdit = () => {
+  const { list } = useSelector(s => s.taskReducer)
+  const dispatch = useDispatch()
   const { number } = useParams();
-  const [item] = props.state.list.filter((it) => it.id === +number);
+  const [item] = list.filter((it) => it.id === +number);
   const [editState, setEditState] = useState(item);
 
   function changeInput(e) {
@@ -38,19 +41,19 @@ const MainEdit = (props) => {
       comment,
       ati,
     };
-    props.dispatch(editItemAC(item));
+    dispatch(editItemAC(item));
   }
 
   return (
     <div className={main}>
-      <div style={{ "margin-bottom": "30px" }}>Отредактируйте данные</div>
+      <div style={{ marginBottom: "30px" }}>Отредактируйте данные</div>
       <div>
         <div>
           Номер заявки:
           {editState.id}
         </div>
         <div>
-          Дата и время получения заявки:
+          Дата и время получения заявки: 
           {editState.date}
         </div>
         <div>

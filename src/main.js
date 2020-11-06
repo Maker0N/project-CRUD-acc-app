@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 import { deleteItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, itemCard, normButton, normLink, redButton } = mainStyle;
 
-const Main = (props) => {
+const Main = () => {
+  const { list } = useSelector(s => s.taskReducer)
+  const dispatch = useDispatch()
   return (
     <div className={main}>
       Список заявок
 
-      {props.state.list.map((it) => {
+      {list.map((it) => {
 
         const url = `https://ati.su/firms/${it.ati}/info`;
         const number = it.id;
@@ -18,7 +21,7 @@ const Main = (props) => {
 
         function deleteButton(e) {
           e.preventDefault();
-          props.dispatch(deleteItemAC(number));
+          dispatch(deleteItemAC(number));
         }
 
         return (

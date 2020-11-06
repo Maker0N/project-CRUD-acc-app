@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { deleteItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, itemCard, normButton, redButton, normLink } = mainStyle;
 
-const SearchResult = (props) => {
-  console.log(props)
+const SearchResult = () => {
+  const { searchList, keyWord } = useSelector(s => s.taskReducer)
+  const dispatch = useDispatch()
   let result = 'результатов'
-  switch (props.state.searchList.length) {
+  switch (searchList.length) {
     case 1:
       result = 'результат'
       break
@@ -20,9 +22,9 @@ const SearchResult = (props) => {
   }
   return (
     <div className={main}>
-      Нашлось {props.state.searchList.length} {result} поиска по "{props.state.keyWord}"
+      Нашлось {searchList.length} {result} поиска по "{keyWord}"
 
-      {props.state.searchList.map((it) => {
+      {searchList.map((it) => {
 
         const url = `https://ati.su/firms/${it.ati}/info`;
         const number = it.id;
@@ -30,7 +32,7 @@ const SearchResult = (props) => {
 
         function deleteButton(e) {
           e.preventDefault();
-          props.dispatch(deleteItemAC(number));
+          dispatch(deleteItemAC(number));
         }
 
         return (

@@ -1,25 +1,28 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { addNewItemAC } from './redux/taskReducer'
 import mainStyle from "./styles/main.module.scss";
 
 const { main, normLink } = mainStyle;
 
-const MainForm = (props) => {
+const MainForm = () => {
+  const { list } = useSelector(s => s.taskReducer)
+  const dispatch = useDispatch()
   let numberItem
-    props.state.list.length === 0
+    list.length === 0
       ? (numberItem = 1)
-      : (numberItem = props.state.list[props.state.list.length - 1].id + 1);
+      : (numberItem = list[list.length - 1].id + 1);
 
   const [formState, setFormState] = useState({
     id: numberItem,
     date: Date(),
     clientName: "",
     carrierName: "",
-    phone: undefined,
+    phone: "",
     comment: "",
-    ati: undefined,
+    ati: "",
   });
 
   const { date, clientName, carrierName, phone, comment, ati } = formState;
@@ -44,16 +47,16 @@ const MainForm = (props) => {
       comment,
       ati,
     };
-    props.dispatch(addNewItemAC(item));
+    dispatch(addNewItemAC(item));
   }
 
   return (
     <div className={main}>
-      <div style={{"margin-bottom": "30px"}}>Внесите данные</div>
+      <div style={{marginBottom: "30px"}}>Внесите данные</div>
       <div>
         <div>
           Номер заявки:
-          {numberItem}
+           {numberItem}
         </div>
         <div>
           Дата и время получения заявки:
